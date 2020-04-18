@@ -161,7 +161,7 @@ class DistageTestRunner[F[_]: TagK]
       } catch {
         case t: Throwable =>
           // fail all tests (if an exception reaches here, it must have happened before the runtime was successfully produced)
-          failAllTests(tests, t)
+          failAllTests(tests, t, t)
           reporter.onFailure(t)
       }
     }
