@@ -66,7 +66,7 @@ class DistageScalatestReporter extends TestReporter {
           location = Some(LineInFile(test.pos.position.line, test.pos.position.file, None)),
           formatter = formatter,
         ))
-      case TestStatus.Failed(t, duration) =>
+      case TestStatus.Failed(t, trace, duration) =>
         doReport(suiteId1)(TestFailed(
           _,
           t.getMessage,
@@ -75,7 +75,7 @@ class DistageScalatestReporter extends TestReporter {
           testName,
           recordedEvents = Vector.empty,
           analysis = Vector.empty,
-          throwable = Some(t),
+          throwable = Some(trace),
           duration = Some(duration.toMillis),
           location = Some(LineInFile(test.pos.position.line, test.pos.position.file, None)),
           formatter = formatter,

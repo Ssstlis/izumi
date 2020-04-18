@@ -263,9 +263,9 @@ class DistageTestRunner[F[_]: TagK]
           F.maybeSuspend {
             reporter.testStatus(test.meta, TestStatus.Cancelled(s.getMessage, testDuration(before)))
           }
-        case (_, cause) =>
+        case (t, cause) =>
           F.maybeSuspend {
-            reporter.testStatus(test.meta, TestStatus.Failed(cause, testDuration(before)))
+            reporter.testStatus(test.meta, TestStatus.Failed(t, cause, testDuration(before)))
           }
       }
     }
@@ -350,7 +350,7 @@ object DistageTestRunner {
 
     final case class Succeed(duration: FiniteDuration) extends Finished
 
-    final case class Failed(t: Throwable, duration: FiniteDuration) extends Finished
+    final case class Failed(t: Throwable, t1: Throwable, duration: FiniteDuration) extends Finished
 
   }
 
